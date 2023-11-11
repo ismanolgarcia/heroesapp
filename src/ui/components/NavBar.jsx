@@ -18,6 +18,8 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { useContext } from 'react';
+import { AuthContext } from '../../auth';
 
 const BoxLink = ({ children }) => {
   return (
@@ -36,12 +38,15 @@ const BoxLink = ({ children }) => {
 };
 
 export const NavBar = () => {
+  const { user, logout } = useContext(AuthContext);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
   const navigate = useNavigate();
 
   const onLogout = () => {
+    logout();
     navigate('/login', {
       replace: true,
     });
@@ -108,7 +113,7 @@ export const NavBar = () => {
                     </Center>
                     <br />
                     <Center>
-                      <p>Username</p>
+                      <p>{user?.name}</p>
                     </Center>
                     <br />
                     <MenuDivider />
@@ -127,6 +132,7 @@ export const NavBar = () => {
             <Stack as={'nav'} spacing={4}>
               <NavLink to="marvel">Marvel</NavLink>
               <NavLink to="dc">Dc</NavLink>
+              <NavLink to="search">Search</NavLink>
             </Stack>
           </Box>
         ) : null}

@@ -1,10 +1,10 @@
-import { Box, Grid, Input, FormLabel } from '@chakra-ui/react';
+import { Box, Grid, Input, FormLabel, Button } from '@chakra-ui/react';
 import { HeroCard, TagSearch } from '../components';
 import { useForm } from '../../hooks/useForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import { getHeroesByName } from '../helpers';
-
+import { Search2Icon } from '@chakra-ui/icons';
 export const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,16 +25,20 @@ export const SearchPage = () => {
   };
 
   return (
-    <Box my={5} mx={[0, 5]}>
+    <Box my={5} mx={[0, 5]} p="5">
       <form onSubmit={onSearchSubmit}>
-        <FormLabel fontSize='2xl'>Search</FormLabel>
-        <Input
-          mb="5"
-          placeholder="Search..."
-          name="searchText"
-          value={searchText}
-          onChange={onInputChange}
-        />
+        <FormLabel fontSize="2xl">Search</FormLabel>
+        <Box display="flex" justifyContent="space-between" mb="5" gap="2">
+          <Input
+            placeholder="Search..."
+            name="searchText"
+            value={searchText}
+            onChange={onInputChange}
+          />
+          <Button onClick={onSearchSubmit}>
+            <Search2Icon />
+          </Button>
+        </Box>
       </form>
       <Grid
         templateColumns={{

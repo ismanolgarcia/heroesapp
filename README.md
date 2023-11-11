@@ -42,11 +42,9 @@ Follow these steps to get the Heroes App up and running on your local machine:
    ```
 
 4. Start the development server:
-
-  ```bash
-  yarn dev
-  ```
-
+   ```bash
+   yarn dev
+   ```
 5. Open your browser and navigate to http://localhost:5173/ to use Heroes App.
 
 ### Usage

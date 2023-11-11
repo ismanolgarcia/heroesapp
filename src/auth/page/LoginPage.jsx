@@ -4,16 +4,26 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Input, 
+  Input,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context';
 
 export const LoginPage = () => {
+  const { login } = useContext(AuthContext);
+  const [user, setUser] = useState('');
   const navigate = useNavigate();
+  const getUser = (e) => {
+    setUser(e.target.value);
+  };
+
   const onLogin = () => {
-    navigate('/', {
+    const lastPath = localStorage.getItem('lastPath') || '/';
+    user && login(user);
+    navigate(lastPath, {
       replace: true,
     });
   };
@@ -24,6 +34,7 @@ export const LoginPage = () => {
       align={'center'}
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}
+      padding="4"
     >
       <Stack
         spacing={4}
@@ -36,14 +47,15 @@ export const LoginPage = () => {
         my={12}
       >
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-          Enter new password
+          Login
         </Heading>
-        <FormControl id="email" isRequired>
-          <FormLabel>Email address</FormLabel>
+        <FormControl id="text" isRequired>
+          <FormLabel>User</FormLabel>
           <Input
-            placeholder="your-email@example.com"
             _placeholder={{ color: 'gray.500' }}
-            type="email"
+            type="text"
+            value={user}
+            onChange={getUser}
           />
         </FormControl>
         <FormControl id="password" isRequired>

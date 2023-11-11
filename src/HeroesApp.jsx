@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { AppRouter } from './router/AppRouter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { AuthProvider } from './auth';
 
 export const HeroesApp = () => {
   useEffect(() => {
@@ -14,7 +15,9 @@ export const HeroesApp = () => {
 
   return (
     <div>
-      <AppRouter />
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </div>
   );
 };
